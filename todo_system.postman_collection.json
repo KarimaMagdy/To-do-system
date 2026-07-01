@@ -1,0 +1,293 @@
+{
+  "info": {
+    "_postman_id": "dd271785-19c3-4164-b9b4-fe73ccd888e7",
+    "name": "todo_system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55419103",
+    "_collection_link": "https://go.postman.co/collection/55419103-dd271785-19c3-4164-b9b4-fe73ccd888e7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create category",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Personal\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/categories",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "categories"
+          ]
+        },
+        "description": "## Create Category\n\nCreates a new task category.\n\n---\n\n### Method & URL\n\n```\nPOST http://127.0.0.1:8000/api/categories\n\n ```\n\n---\n\n### Request Body Parameters\n\nThe request body should be sent as **JSON** (`application/json`).\n\n| Parameter | Type | Required | Description |\n| --- | --- | --- | --- |\n| `name` | string | ✅ Yes | The name of the category to create |\n\n---\n\n### Example Request Body\n\n``` json\n{\n    \"name\": \"Personal\"\n}\n\n ```\n\n---\n\n### Example Response\n\n**Status:** `200 OK`\n\n``` json\n{\n    \"success\": true,\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"Personal\",\n        \"created_at\": \"2026-07-01T04:07:19.000000Z\",\n        \"updated_at\": \"2026-07-01T04:07:19.000000Z\"\n    }\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "get all categories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/categories",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "categories"
+          ]
+        },
+        "description": "## Get All Categories\n\nRetrieves a list of all available categories in the system.\n\n**Method:** `GET`  \n**URL:** `http://127.0.0.1:8000/api/categories`\n\n### Response\n\nReturns a JSON object with a `success` flag and a `data` array containing all category records. Each category object includes the following fields:\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `id` | integer | Unique identifier for the category |\n| `name` | string | Name of the category |\n| `created_at` | string (ISO 8601) | Timestamp when the category was created |\n| `updated_at` | string (ISO 8601) | Timestamp when the category was last updated |\n\n### Example Response (200 OK)\n\n``` json\n{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 2,\n      \"name\": \"Work\",\n      \"created_at\": \"2026-07-01T04:07:01.000000Z\",\n      \"updated_at\": \"2026-07-01T04:07:01.000000Z\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Personal\",\n      \"created_at\": \"2026-07-01T04:07:19.000000Z\",\n      \"updated_at\": \"2026-07-01T04:07:19.000000Z\"\n    }\n  ]\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "category by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/categories/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "categories",
+            "3"
+          ]
+        },
+        "description": "## Get Category by ID\n\nRetrieves the details of a single category using its unique identifier.\n\n### Method\n`GET`\n\n### URL\n`http://127.0.0.1:8000/api/categories/:id`\n\n### Path Parameters\n\n| Parameter | Type    | Required | Description                          |\n|-----------|---------|----------|--------------------------------------|\n| `id`      | integer | Yes      | The unique ID of the category to retrieve. |\n\n### Request Headers\n\nNo additional headers required.\n\n### Request Body\n\nNone.\n\n### Response\n\n**Success (200 OK)**\n\nReturns a JSON object containing the category details.\n\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 3,\n    \"name\": \"Personal\",\n    \"created_at\": \"2026-07-01T04:07:19.000000Z\",\n    \"updated_at\": \"2026-07-01T04:07:19.000000Z\"\n  }\n}\n```\n\n| Field        | Type    | Description                              |\n|--------------|---------|------------------------------------------|\n| `success`    | boolean | Indicates whether the request succeeded. |\n| `data.id`    | integer | The unique ID of the category.           |\n| `data.name`  | string  | The name of the category.                |\n| `data.created_at` | string | ISO 8601 timestamp of when the category was created. |\n| `data.updated_at` | string | ISO 8601 timestamp of the last update.  |\n\n### Notes\n- Replace the `3` in the URL with the actual category ID you want to retrieve.\n- Returns a `404` or error response if the category with the given ID does not exist."
+      },
+      "response": []
+    },
+    {
+      "name": "update category",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Study\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/categories/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "categories",
+            "3"
+          ]
+        },
+        "description": "Updates an existing category by its ID.\n\n**Method:** PUT  \n**URL:** `http://127.0.0.1:8000/api/categories/:id`\n\n### Path Parameters\n| Parameter | Type    | Required | Description                        |\n|-----------|---------|----------|------------------------------------|\n| id        | integer | Yes      | The unique identifier of the category to update |\n\n### Request Body\nSend a JSON object with the fields you want to update.\n\n| Field | Type   | Required | Description              |\n|-------|--------|----------|--------------------------|\n| name  | string | Yes      | The new name of the category |\n\n**Example Request Body:**\n```json\n{\n    \"name\": \"Study\"\n}\n```\n\n### Response\nReturns a success flag and the updated category object.\n\n**Example Response (200 OK):**\n```json\n{\n    \"success\": true,\n    \"data\": {\n        \"id\": 3,\n        \"name\": \"Study\",\n        \"created_at\": \"2026-07-01T04:07:19.000000Z\",\n        \"updated_at\": \"2026-07-01T04:08:35.000000Z\"\n    }\n}\n```"
+      },
+      "response": []
+    },
+    {
+      "name": "create task",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"category_id\": 2,\r\n    \"title\": \"Study API\",\r\n    \"description\": \"Read documentation\",\r\n    \"completed\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/tasks",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "tasks"
+          ]
+        },
+        "description": "Creates a new task in the system.\n\n## Endpoint\n\n`POST /api/tasks`\n\n## Request Body (JSON)\n\n| Field | Type | Description |\n| --- | --- | --- |\n| `category_id` | integer | The ID of the category this task belongs to |\n| `title` | string | The title/name of the task |\n| `description` | string | A detailed description of the task |\n| `completed` | boolean | The completion status of the task (`false` = not completed, `true` = completed) |\n\n## Response\n\nReturns a JSON object with the following structure:\n\n- **`success`** _(boolean)_: Indicates whether the request was successful.\n    \n- **`data`** _(object)_: The newly created task object, containing:\n    - `id` — Unique identifier of the created task\n        \n    - `category_id` — The category the task is assigned to\n        \n    - `title` — The task title\n        \n    - `description` — The task description\n        \n    - `completed` — Completion status\n        \n    - `created_at` — Timestamp of when the task was created\n        \n    - `updated_at` — Timestamp of the last update\n        \n\n## Example Response\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 4,\n    \"category_id\": 2,\n    \"title\": \"Study API\",\n    \"description\": \"Read documentation\",\n    \"completed\": false,\n    \"created_at\": \"2026-07-01T04:18:15.000000Z\",\n    \"updated_at\": \"2026-07-01T04:18:15.000000Z\"\n  }\n}\n\n ```"
+      },
+      "response": []
+    },
+    {
+      "name": "get all tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/tasks",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "tasks"
+          ]
+        },
+        "description": "## Get All Tasks\n\nRetrieves a list of all tasks stored in the system.\n\n**Method:** `GET`  \n**URL:** `http://127.0.0.1:8000/api/tasks`\n\n---\n\n### Response Structure\n\nReturns a JSON object with the following fields:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `success` | `boolean` | Indicates whether the request was successful |\n| `data` | `array` | Array of task objects |\n\n#### Task Object\n\nEach item in the `data` array contains:\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `id` | `integer` | Unique identifier of the task |\n| `title` | `string` | Title of the task |\n| `category_id` | `integer` | ID of the category this task belongs to |\n| `description` | `string` | Detailed description of the task |\n| `completed` | `integer` | Completion status — `0` for incomplete, `1` for complete |\n| `created_at` | `string` | ISO 8601 timestamp of when the task was created |\n| `updated_at` | `string` | ISO 8601 timestamp of when the task was last updated |\n| `category` | `object` | Nested category object associated with the task |\n\n#### Nested `category` Object\n\n| Field | Type | Description |\n|-------|------|-------------|\n| `id` | `integer` | Unique identifier of the category |\n| `name` | `string` | Name of the category |\n| `created_at` | `string` | ISO 8601 timestamp of when the category was created |\n| `updated_at` | `string` | ISO 8601 timestamp of when the category was last updated |\n\n---\n\n### Example Response\n\n```json\n{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 2,\n      \"title\": \"Finish Laravel\",\n      \"category_id\": 2,\n      \"description\": \"Complete CRUD\",\n      \"completed\": 0,\n      \"created_at\": \"2026-07-01T04:17:23.000000Z\",\n      \"updated_at\": \"2026-07-01T04:17:23.000000Z\",\n      \"category\": {\n        \"id\": 2,\n        \"name\": \"Work\",\n        \"created_at\": \"2026-07-01T04:07:01.000000Z\",\n        \"updated_at\": \"2026-07-01T04:07:01.000000Z\"\n      }\n    }\n  ]\n}\n```"
+      },
+      "response": []
+    },
+    {
+      "name": "task by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/tasks/2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "tasks",
+            "2"
+          ]
+        },
+        "description": "## Get Task by ID\n\nRetrieves the details of a single task identified by its unique ID.\n\n**Method:** `GET`\n**URL:** `http://127.0.0.1:8000/api/tasks/{id}`\n\n---\n\n### Path Parameters\n\n| Parameter | Type    | Required | Description                        |\n|-----------|---------|----------|------------------------------------|\n| `id`      | integer | Yes      | The unique identifier of the task. |\n\n---\n\n### Response Structure\n\nA successful request returns a JSON object with the following structure:\n\n| Field                     | Type    | Description                                          |\n|---------------------------|---------|------------------------------------------------------|\n| `success`                 | boolean | Indicates whether the request was successful.        |\n| `data`                    | object  | The task object.                                     |\n| `data.id`                 | integer | Unique identifier of the task.                       |\n| `data.title`              | string  | Title of the task.                                   |\n| `data.category_id`        | integer | ID of the category this task belongs to.             |\n| `data.description`        | string  | Detailed description of the task.                    |\n| `data.completed`          | integer | Completion status (`0` = incomplete, `1` = complete).|\n| `data.created_at`         | string  | ISO 8601 timestamp of when the task was created.     |\n| `data.updated_at`         | string  | ISO 8601 timestamp of when the task was last updated.|\n| `data.category`           | object  | The category associated with the task.               |\n| `data.category.id`        | integer | Unique identifier of the category.                   |\n| `data.category.name`      | string  | Name of the category.                                |\n| `data.category.created_at`| string  | ISO 8601 timestamp of when the category was created. |\n| `data.category.updated_at`| string  | ISO 8601 timestamp of when the category was updated. |\n\n---\n\n### Example Response\n\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"title\": \"Finish Laravel\",\n    \"category_id\": 2,\n    \"description\": \"Complete CRUD\",\n    \"completed\": 0,\n    \"created_at\": \"2026-07-01T04:17:23.000000Z\",\n    \"updated_at\": \"2026-07-01T04:17:23.000000Z\",\n    \"category\": {\n      \"id\": 2,\n      \"name\": \"Work\",\n      \"created_at\": \"2026-07-01T04:07:01.000000Z\",\n      \"updated_at\": \"2026-07-01T04:07:01.000000Z\"\n    }\n  }\n}\n```"
+      },
+      "response": []
+    },
+    {
+      "name": "update task",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"category_id\": 2,\r\n    \"title\": \"Finish Laravel Project\",\r\n    \"description\": \"CRUD Completed\",\r\n    \"completed\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/tasks/2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "tasks",
+            "2"
+          ]
+        },
+        "description": "## Update Task\n\nUpdates an existing task identified by its ID. Use this endpoint to modify any of the task's fields, such as its title, description, category, or completion status.\n\n**Endpoint:** `PUT /api/tasks/{id}`\n\n---\n\n### Request Body\n\nSend a JSON object with the fields you want to update:\n\n| Field | Type | Description |\n|---|---|---|\n| `category_id` | integer | The ID of the category this task belongs to. |\n| `title` | string | The title or name of the task. |\n| `description` | string | A brief description of the task. |\n| `completed` | boolean | Indicates whether the task has been completed (`true`) or not (`false`). |\n\n**Example:**\n```json\n{\n  \"category_id\": 2,\n  \"title\": \"Finish Laravel Project\",\n  \"description\": \"CRUD Completed\",\n  \"completed\": true\n}\n```\n\n---\n\n### Response\n\nReturns a JSON object with a `success` flag and the updated task data.\n\n**Example Response (200 OK):**\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"title\": \"Finish Laravel Project\",\n    \"category_id\": 2,\n    \"description\": \"CRUD Completed\",\n    \"completed\": true,\n    \"created_at\": \"2026-07-01T04:17:23.000000Z\",\n    \"updated_at\": \"2026-07-01T04:20:07.000000Z\"\n  }\n}\n```\n\n| Field | Type | Description |\n|---|---|---|\n| `success` | boolean | `true` if the update was successful. |\n| `data.id` | integer | The unique identifier of the task. |\n| `data.title` | string | The updated title of the task. |\n| `data.category_id` | integer | The category the task belongs to. |\n| `data.description` | string | The updated description of the task. |\n| `data.completed` | boolean | The updated completion status of the task. |\n| `data.created_at` | string (ISO 8601) | Timestamp when the task was originally created. |\n| `data.updated_at` | string (ISO 8601) | Timestamp when the task was last updated. |"
+      },
+      "response": []
+    },
+    {
+      "name": "delete task",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/tasks/2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "tasks",
+            "2"
+          ]
+        },
+        "description": "Deletes a specific task by its ID.\n\n**Method:** `DELETE`\n**URL:** `http://127.0.0.1:8000/api/tasks/:id`\n\nReplace `:id` in the URL with the numeric ID of the task you want to delete (e.g., `/api/tasks/2`).\n\n**Response:**\nOn success, the server returns a JSON object confirming the deletion:\n```json\n{\n  \"success\": true,\n  \"message\": \"Task deleted successfully\"\n}\n```\n\n> **Note:** This action is irreversible. Once a task is deleted, it cannot be recovered."
+      },
+      "response": []
+    },
+    {
+      "name": "delete category",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/categories/3",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "categories",
+            "3"
+          ]
+        },
+        "description": "## Delete Category\n\nDeletes a specific category by its ID.\n\n**Method:** `DELETE`  \n**URL:** `http://127.0.0.1:8000/api/categories/{id}`\n\nThe category ID is passed as a path segment in the URL (e.g., `/api/categories/3` deletes the category with ID `3`).\n\n### Successful Response (200 OK)\n\n```json\n{\n  \"success\": true,\n  \"message\": \"Category deleted successfully\"\n}\n```\n\nA `success: true` value confirms the category was found and permanently removed."
+      },
+      "response": []
+    }
+  ]
+}
